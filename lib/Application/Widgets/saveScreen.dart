@@ -3,6 +3,8 @@ import 'dart:typed_data';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stray_dog_app/Application/tools/AppText.dart';
 
@@ -14,6 +16,37 @@ class CameraLocationScreen extends StatefulWidget {
 }
 
 class _CameraLocationScreenState extends State<CameraLocationScreen> {
+  Position? _currentLocation;
+  late bool servicePermission = false;
+  late LocationPermission permission;
+
+  String _currentAddress = '';
+
+  Future<Position> _getCurrentLocation() async {
+    servicePermission = await Geolocator.isLocationServiceEnabled();
+    if (!servicePermission) {
+      print('service disabled');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+    return await Geolocator.getCurrentPosition();
+  }
+
+  _getAddressFromCoordinates() async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+          _currentLocation!.latitude, _currentLocation!.longitude);
+      Placemark place = placemarks[0];
+      setState(() {
+        _currentAddress = "${place.locality},${place.country}";
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Uint8List? _image;
   File? selectedImage;
   @override
@@ -21,13 +54,13 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Inform Us',
+          'Report Us',
           style: titleStyle,
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
-        child: Column(children: [
+        child: ListView(children: [
           Container(
             margin: const EdgeInsets.only(left: 30, top: 10, bottom: 10),
             height: 30,
@@ -62,54 +95,79 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
             color: const Color.fromARGB(255, 16, 148, 236),
           ),
           _image != null
-              ? Stack(children: [
-                  Expanded(
-                    child: CircleAvatar(
-                      radius: 100,
-                      backgroundImage: MemoryImage(_image!),
+              ? Expanded(
+                  child: CircleAvatar(
+                    radius: 100,
+                    backgroundImage: MemoryImage(_image!),
+                  ),
+                )
+              : const Expanded(
+                  child: CircleAvatar(
+                    radius: 100,
+                    backgroundImage: AssetImage(
+                      'assets/images/savedog.jpg',
                     ),
                   ),
-                  Positioned(
-                    bottom: -2,
-                    left: 150,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.add_a_photo,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      onPressed: () {
-                        showImagePickerOption(context);
-                      },
-                    ),
-                  ),
-                ])
-              : Stack(
-                  children: [
-                    const Expanded(
-                      child: CircleAvatar(
-                        radius: 100,
-                        backgroundImage: AssetImage(
-                          'assets/images/savedog.jpg',
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: -2,
-                      left: 150,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.add_a_photo,
-                          color: Colors.black,
-                          size: 30,
-                        ),
-                        onPressed: () {
-                          showImagePickerOption(context);
-                        },
-                      ),
-                    ),
-                  ],
                 ),
+          OutlinedButton.icon(
+            label: AppText(
+              txt: 'Add Stray dog photo',
+              size: 10,
+              color: Colors.black54,
+            ),
+            onPressed: () {
+              showImagePickerOption(context);
+            },
+            icon: const Icon(
+              Icons.add_a_photo,
+              color: Colors.blue,
+            ),
+          ),
+          OutlinedButton.icon(
+            onPressed: () async {
+              _currentLocation = await _getCurrentLocation();
+              await _getAddressFromCoordinates();
+              print("${_currentLocation}");
+              print("${_currentAddress}");
+            },
+            icon: const Icon(
+              Icons.location_pin,
+              color: Colors.red,
+            ),
+            label: AppText(
+                txt: 'Get Current Location', size: 10, color: Colors.black54),
+          ),
+          AppText(
+            txt: 'Location Coordinates',
+            fw: FontWeight.bold,
+          ),
+          AppText(
+            txt:
+                "Latitude =${_currentLocation?.latitude}; Longitude=${_currentLocation?.longitude}",
+            size: 10,
+          ),
+          AppText(
+            txt: 'Location Address',
+            fw: FontWeight.bold,
+          ),
+          AppText(
+            txt: "${_currentAddress}",
+            size: 10,
+          ),
+          gyap(10, 0),
+          Card(
+            color: Color.fromARGB(255, 228, 223, 223),
+            margin: EdgeInsets.only(right: 10),
+            child: TextButton.icon(
+              label: Text(
+                'Submit',
+                style: titleStyle,
+              ),
+              icon: Icon(Icons.document_scanner),
+              onPressed: () {},
+            ),
+          ),
+          gyap(10, 0)
         ]),
       ),
     );
