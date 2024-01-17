@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stray_dog_app/Application/Widgets/HelpScreen.dart';
-import 'package:stray_dog_app/Application/Widgets/homeScreen.dart';
-import 'package:stray_dog_app/Application/Widgets/saveScreen.dart';
+import 'package:stray_dog_app/Application/Widgets/mainScreens/HelpScreen.dart';
+import 'package:stray_dog_app/Application/Widgets/mainScreens/finalScreen.dart';
+import 'package:stray_dog_app/Application/Widgets/mainScreens/homeScreen.dart';
+import 'package:stray_dog_app/Application/Widgets/mainScreens/saveScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,15 +16,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        'homeScreen': (context) => HomeScreen(),
-        'helpScreen': (context) => HelpWaysScreen(),
-        'saveScreen': (context) => CameraLocationScreen()
+        'homeScreen': (context) => const HomeScreen(),
+        'helpScreen': (context) => const HelpWaysScreen(),
+        'saveScreen': (context) => const CameraLocationScreen(),
+        'finalScreen': (context) => const FinalScreen()
       },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-            elevation: 50,
             backgroundColor: Color.fromARGB(255, 228, 223, 223),
             centerTitle: true),
         useMaterial3: true,

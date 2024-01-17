@@ -25,7 +25,7 @@ class AppText extends StatelessWidget {
 TextStyle get titleStyle {
   return GoogleFonts.lato(
     textStyle: const TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87),
+        fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87),
   );
 }
 
@@ -39,7 +39,7 @@ Widget gyap(final double? hgyap, final double? wgyap) {
 TextStyle get HeadStyle {
   return GoogleFonts.lato(
     textStyle: const TextStyle(
-        fontSize: 23,
+        fontSize: 18,
         fontWeight: FontWeight.bold,
         color: Color.fromARGB(255, 48, 32, 32)),
   );
@@ -75,7 +75,7 @@ Widget waysCard(
         gyap(10, 0),
         AppText(
           txt: text,
-          size: 16,
+          size: 12,
           color: Colors.black,
         ),
         gyap(10, 0),

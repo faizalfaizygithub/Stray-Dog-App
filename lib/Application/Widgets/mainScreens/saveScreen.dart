@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:stray_dog_app/Application/Widgets/customTextField.dart';
 import 'package:stray_dog_app/Application/tools/AppText.dart';
 
 class CameraLocationScreen extends StatefulWidget {
@@ -61,27 +62,7 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: ListView(children: [
-          Container(
-            margin: const EdgeInsets.only(left: 30, top: 10, bottom: 10),
-            height: 30,
-            width: 350,
-            child: DefaultTextStyle(
-              style: const TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
-              child: AnimatedTextKit(
-                pause: const Duration(milliseconds: 200),
-                repeatForever: true,
-                animatedTexts: [
-                  TypewriterAnimatedText('SAVE STRAY DOGS_'),
-                ],
-                onTap: () {
-                  print("Tap Event");
-                },
-              ),
-            ),
-          ),
+          _animatedHeadingSec(),
           AppText(
             txt:
                 '"Under Stray Dog Management Rules 2001, its illegal for an individual, RWA or estate management to remove or relocate dogs. The dogs have to be sterilized and vaccinated and returned to the same area". ',
@@ -138,6 +119,14 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
                 txt: 'Get Current Location', size: 10, color: Colors.black54),
           ),
           AppText(
+            txt: 'Location Address',
+            fw: FontWeight.bold,
+          ),
+          AppText(
+            txt: "${_currentAddress}",
+            size: 12,
+          ),
+          AppText(
             txt: 'Location Coordinates',
             fw: FontWeight.bold,
           ),
@@ -146,15 +135,8 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
                 "Latitude =${_currentLocation?.latitude}; Longitude=${_currentLocation?.longitude}",
             size: 10,
           ),
-          AppText(
-            txt: 'Location Address',
-            fw: FontWeight.bold,
-          ),
-          AppText(
-            txt: "${_currentAddress}",
-            size: 10,
-          ),
           gyap(10, 0),
+          MyCustomTextField(),
           Card(
             color: Color.fromARGB(255, 228, 223, 223),
             margin: EdgeInsets.only(right: 10),
@@ -164,11 +146,32 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
                 style: titleStyle,
               ),
               icon: Icon(Icons.document_scanner),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed('finalScreen');
+              },
             ),
           ),
-          gyap(10, 0)
+          gyap(10, 0),
         ]),
+      ),
+    );
+  }
+
+  _animatedHeadingSec() {
+    return Container(
+      margin: const EdgeInsets.only(left: 30, top: 10, bottom: 10),
+      height: 30,
+      width: 350,
+      child: DefaultTextStyle(
+        style: const TextStyle(
+            fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+        child: AnimatedTextKit(
+          pause: const Duration(milliseconds: 200),
+          repeatForever: true,
+          animatedTexts: [
+            TypewriterAnimatedText('SAVE STRAY DOGS_'),
+          ],
+        ),
       ),
     );
   }

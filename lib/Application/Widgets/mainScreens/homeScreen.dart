@@ -35,11 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           gyap(20, 0),
           Container(
-            margin: EdgeInsets.only(top: 10, left: 110),
+            margin: EdgeInsets.symmetric(horizontal: 20),
             height: 100,
             child: DefaultTextStyle(
               style: const TextStyle(
-                  fontSize: 28.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
               child: AnimatedTextKit(
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 AppText(
                   txt: caption,
-                  size: 16,
+                  size: 12,
                 ),
                 gyap(20, 0)
               ],
@@ -91,7 +91,31 @@ class _HomeScreenState extends State<HomeScreen> {
           gyap(10, 0)
         ],
       ),
-      drawer: Drawer(),
+      drawer: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30), color: Colors.white70),
+        height: 350,
+        width: 350,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _drawerList(Icons.home, 'Home', () => null),
+            _drawerList(Icons.person, 'About', () => null),
+            _drawerList(Icons.report, 'Report', () => null),
+            _drawerList(Icons.feedback, 'FeedBack', () => null),
+          ],
+        ),
+      ),
     );
+  }
+
+  _drawerList(IconData icon, String txt, Function() action) {
+    return TextButton.icon(
+        onPressed: action,
+        icon: Icon(icon),
+        label: AppText(
+          txt: txt,
+          size: 20,
+        ));
   }
 }
