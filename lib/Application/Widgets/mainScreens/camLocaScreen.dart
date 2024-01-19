@@ -32,6 +32,8 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
       'email': _emailController.text,
       'incident': _reportController.text,
       'image': imageURL,
+      'location': _currentAddress,
+      'value': _currentLocation.toString()
     };
     _items.add(data);
   }
