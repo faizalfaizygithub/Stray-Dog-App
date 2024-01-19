@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -23,11 +24,14 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
   final CollectionReference _items =
       FirebaseFirestore.instance.collection('report');
 
+  String imageURL = '';
+
   void addReport() {
     final data = {
       'name': _nameController.text,
       'email': _emailController.text,
       'incident': _reportController.text,
+      'image': imageURL,
     };
     _items.add(data);
   }
@@ -170,15 +174,24 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
           ),
           gyap(5, 0),
           Card(
-            color: Color.fromARGB(255, 228, 223, 223),
-            margin: EdgeInsets.only(right: 10),
+            color: const Color.fromARGB(255, 228, 223, 223),
+            margin: const EdgeInsets.only(right: 10),
             child: TextButton.icon(
               label: Text(
                 'Submit',
                 style: titleStyle,
               ),
-              icon: Icon(Icons.document_scanner),
-              onPressed: () {
+              icon: const Icon(Icons.document_scanner),
+              onPressed: () async {
+                if (imageURL.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please Select and Upload Image'),
+                    ),
+                  );
+                  return;
+                }
+
                 addReport();
 
                 Navigator.of(context).pushNamed('finalScreen');
@@ -260,7 +273,7 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
                 children: [
                   Expanded(
                     child: InkWell(
-                      onTap: () {
+                      onTap: () async {
                         _pickImageFromGallery();
                       },
                       child: Column(
@@ -282,6 +295,8 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
                     child: InkWell(
                       onTap: () {
                         _pickImageFromCamera();
+                        String fileName =
+                            DateTime.now().microsecondsSinceEpoch.toString();
                       },
                       child: Column(
                         children: [
@@ -316,7 +331,19 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
       selectedImage = File(returnImage.path);
       _image = File(returnImage.path).readAsBytesSync();
     });
-    Navigator.pop(context); //close the model sheet
+
+    String fileName = DateTime.now().microsecondsSinceEpoch.toString();
+//Get the reference to storage root
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+
+    Reference referenceDirectImages = referenceRoot.child('images');
+    Reference referenceImageToUpload = referenceDirectImages.child(fileName);
+
+    try {
+      await referenceImageToUpload.putFile(File(returnImage.path));
+
+      imageURL = await referenceImageToUpload.getDownloadURL();
+    } catch (error) {}
   }
 
 //Camera
@@ -330,6 +357,17 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
       selectedImage = File(returnImage.path);
       _image = File(returnImage.path).readAsBytesSync();
     });
-    Navigator.pop(context);
+    String fileName = DateTime.now().microsecondsSinceEpoch.toString();
+//Get the reference to storage root
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+
+    Reference referenceDirectImages = referenceRoot.child('images');
+    Reference referenceImageToUpload = referenceDirectImages.child(fileName);
+
+    try {
+      await referenceImageToUpload.putFile(File(returnImage.path));
+
+      imageURL = await referenceImageToUpload.getDownloadURL();
+    } catch (error) {}
   }
 }
