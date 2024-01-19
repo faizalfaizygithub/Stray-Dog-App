@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyA4wLfT04qsgxJ-1ETcbNXM2BJohu1I1vg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>613157869257</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.strayDogApp</string>
+	<key>PROJECT_ID</key>
+	<string>straydogapp-76ffa</string>
+	<key>STORAGE_BUCKET</key>
+	<string>straydogapp-76ffa.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:613157869257:ios:29ba274bb1a1187cc65f18</string>
+</dict>
+</plist>

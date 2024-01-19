@@ -36,6 +36,11 @@ class _FinalScreenState extends State<FinalScreen> {
               color: Colors.grey,
             ),
             ContactUs(),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('adminScreen');
+                },
+                child: AppText(txt: 'For Admin')),
             Card(
               color: Color.fromARGB(255, 228, 223, 223),
               margin: EdgeInsets.only(right: 10),

@@ -2,11 +2,11 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:stray_dog_app/Application/Widgets/customTextField.dart';
 import 'package:stray_dog_app/Application/tools/AppText.dart';
 
 class CameraLocationScreen extends StatefulWidget {
@@ -17,6 +17,21 @@ class CameraLocationScreen extends StatefulWidget {
 }
 
 class _CameraLocationScreenState extends State<CameraLocationScreen> {
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _reportController = TextEditingController();
+  final CollectionReference _items =
+      FirebaseFirestore.instance.collection('report');
+
+  void addReport() {
+    final data = {
+      'name': _nameController.text,
+      'email': _emailController.text,
+      'incident': _reportController.text,
+    };
+    _items.add(data);
+  }
+
   Position? _currentLocation;
   late bool servicePermission = false;
   late LocationPermission permission;
@@ -136,7 +151,24 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
             size: 10,
           ),
           gyap(10, 0),
-          MyCustomTextField(),
+          _customTextField(
+            'Name',
+            1,
+            _nameController,
+          ),
+          gyap(2, 0),
+          _customTextField(
+            'Email',
+            1,
+            _emailController,
+          ),
+          gyap(2, 0),
+          _customTextField(
+            'Report',
+            4,
+            _reportController,
+          ),
+          gyap(5, 0),
           Card(
             color: Color.fromARGB(255, 228, 223, 223),
             margin: EdgeInsets.only(right: 10),
@@ -147,12 +179,50 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
               ),
               icon: Icon(Icons.document_scanner),
               onPressed: () {
+                addReport();
+
                 Navigator.of(context).pushNamed('finalScreen');
               },
             ),
           ),
           gyap(10, 0),
         ]),
+      ),
+    );
+  }
+
+  _customTextField(
+    String textName,
+    int count,
+    final dynamic controller,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextField(
+        controller: controller,
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          label: AppText(
+            txt: textName,
+            size: 14,
+          ),
+          labelStyle: const TextStyle(color: Colors.grey),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey.shade200,
+              width: 2,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.blueAccent,
+              width: 2,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        maxLines: count,
       ),
     );
   }

@@ -1,10 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/HelpScreen.dart';
+import 'package:stray_dog_app/Application/Widgets/mainScreens/adminPanel.dart';
+import 'package:stray_dog_app/Application/Widgets/mainScreens/camLocaScreen.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/finalScreen.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/homeScreen.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/saveScreen.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -19,7 +27,8 @@ class MyApp extends StatelessWidget {
         'homeScreen': (context) => const HomeScreen(),
         'helpScreen': (context) => const HelpWaysScreen(),
         'saveScreen': (context) => const CameraLocationScreen(),
-        'finalScreen': (context) => const FinalScreen()
+        'finalScreen': (context) => const FinalScreen(),
+        'adminScreen': (context) => const AdminPanel(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
