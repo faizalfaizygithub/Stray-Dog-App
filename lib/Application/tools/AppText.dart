@@ -29,6 +29,13 @@ TextStyle get titleStyle {
   );
 }
 
+TextStyle get smallTexts {
+  return GoogleFonts.lato(
+    textStyle: const TextStyle(
+        fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black87),
+  );
+}
+
 Widget gyap(final double? hgyap, final double? wgyap) {
   return SizedBox(
     height: hgyap,

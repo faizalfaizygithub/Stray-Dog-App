@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:stray_dog_app/Application/tools/AppText.dart';
 
 class AdminPanel extends StatefulWidget {
@@ -10,6 +11,10 @@ class AdminPanel extends StatefulWidget {
 }
 
 class _AdminPanelState extends State<AdminPanel> {
+  void deleteReport(docId) {
+    _items.doc(docId).delete();
+  }
+
   final CollectionReference _items =
       FirebaseFirestore.instance.collection('report');
   late Stream<QuerySnapshot> _stream;
@@ -46,61 +51,113 @@ class _AdminPanelState extends State<AdminPanel> {
             return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
-                  //  final DocumentSnapshot itemSnap = snapshot.data.docs[index];
+                  final DocumentSnapshot itemSnap = snapshot.data.docs[index];
                   Map thisItems = _items[index];
                   return SingleChildScrollView(
-                    child: Card(
-                      elevation: 10,
-                      margin: EdgeInsets.all(10),
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              radius: 50,
-                              child: thisItems.containsKey('image')
-                                  ? ClipOval(
-                                      child: Image.network(
-                                        '${thisItems['image']}',
-                                        fit: BoxFit.cover,
-                                        height: 100,
-                                        width: 100,
-                                      ),
-                                    )
-                                  : CircleAvatar(),
-                            ),
-                            Row(
-                              children: [
-                                AppText(
-                                  txt: 'Name:',
-                                  size: 18,
-                                ),
-                                gyap(0, 20),
-                                Text('${thisItems['name']}'),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                AppText(
-                                  txt: 'Email:',
-                                  size: 18,
-                                ),
-                                gyap(0, 20),
-                                Text('${thisItems['email'].toString()}'),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                AppText(
-                                  txt: 'Report:',
-                                  size: 18,
-                                ),
-                                gyap(0, 20),
-                                Text('${thisItems['incident']}'),
-                              ],
-                            ),
-                          ],
+                    child: Slidable(
+                      startActionPane:
+                          ActionPane(motion: StretchMotion(), children: [
+                        SlidableAction(
+                          onPressed: ((context) {
+                            deleteReport(itemSnap.id);
+                          }),
+                          icon: Icons.delete,
+                          backgroundColor: Colors.red,
+                        ),
+                      ]),
+                      child: Card(
+                        elevation: 10,
+                        margin: EdgeInsets.all(10),
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 50,
+                                child: thisItems.containsKey('image')
+                                    ? ClipOval(
+                                        child: Image.network(
+                                          '${thisItems['image']}',
+                                          fit: BoxFit.cover,
+                                          height: 100,
+                                          width: 100,
+                                        ),
+                                      )
+                                    : CircleAvatar(),
+                              ),
+                              Row(
+                                children: [
+                                  AppText(
+                                    txt: 'Name:',
+                                    size: 15,
+                                    fw: FontWeight.bold,
+                                  ),
+                                  gyap(0, 20),
+                                  Text(
+                                    '${thisItems['name']}',
+                                    style: smallTexts,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  AppText(
+                                    txt: 'Email:',
+                                    size: 15,
+                                    fw: FontWeight.bold,
+                                  ),
+                                  gyap(0, 20),
+                                  Text(
+                                    '${thisItems['email'].toString()}',
+                                    style: smallTexts,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  AppText(
+                                    txt: 'Location:',
+                                    size: 15,
+                                    fw: FontWeight.bold,
+                                  ),
+                                  gyap(0, 20),
+                                  Text(
+                                    '${thisItems['location'].toString()}',
+                                    style: smallTexts,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  AppText(
+                                    txt: 'Value:',
+                                    size: 15,
+                                    fw: FontWeight.bold,
+                                  ),
+                                  gyap(0, 20),
+                                  Text(
+                                    '${thisItems['value'].toString()}',
+                                    style: smallTexts,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  AppText(
+                                    txt: 'Report:',
+                                    size: 15,
+                                    fw: FontWeight.bold,
+                                  ),
+                                  gyap(0, 20),
+                                  Text(
+                                    '${thisItems['incident']}',
+                                    style: smallTexts,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
