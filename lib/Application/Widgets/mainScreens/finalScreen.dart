@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stray_dog_app/Application/Widgets/GetInTouch.dart';
 import 'package:stray_dog_app/Application/tools/AppText.dart';
@@ -17,17 +18,25 @@ class _FinalScreenState extends State<FinalScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.exit_to_app))
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('adminScreen');
+                },
+                icon: const Icon(
+                  Icons.admin_panel_settings_rounded,
+                  color: Colors.white,
+                  size: 30,
+                ))
           ],
           title: Text(
             'Report Summary',
-            style: titleStyle,
+            style: appBartitleStyle,
           ),
         ),
         body: ListView(
           children: [
             gyap(20, 0),
-            Image.asset('assets/images/tnk.png'),
+            Image.asset('assets/images/tnku.jpg'),
             gyap(50, 0),
             const Divider(
               thickness: 5,
@@ -35,22 +44,23 @@ class _FinalScreenState extends State<FinalScreen> {
               indent: 20,
               color: Colors.grey,
             ),
-            ContactUs(),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('adminScreen');
-                },
-                child: AppText(txt: 'For Admin')),
+            const ContactUs(),
             Card(
-              color: Color.fromARGB(255, 228, 223, 223),
-              margin: EdgeInsets.only(right: 10),
+              color: Colors.blueGrey,
+              margin: const EdgeInsets.only(right: 10),
               child: TextButton.icon(
                 label: Text(
-                  'Exit',
+                  'Sign Out',
                   style: titleStyle,
                 ),
-                icon: Icon(Icons.exit_to_app_rounded),
-                onPressed: () {},
+                icon: const Icon(
+                  Icons.exit_to_app_rounded,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushNamed('loginPage');
+                },
               ),
             ),
           ],

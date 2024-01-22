@@ -9,10 +9,17 @@ class HelpWaysScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-        'How to Help:',
-        style: titleStyle,
-      )),
+        title: Text(
+          'How to Help:',
+          style: appBartitleStyle,
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView(
@@ -34,14 +41,17 @@ class HelpWaysScreen extends StatelessWidget {
             waysCard("6.Provide food and water", 'assets/images/dogfeed.webp',
                 caption6),
             Card(
-              color: Color.fromARGB(255, 228, 223, 223),
-              margin: EdgeInsets.only(right: 10),
+              color: Colors.blueGrey,
+              margin: const EdgeInsets.only(right: 10),
               child: TextButton.icon(
                 label: Text(
                   'Inform Us',
                   style: titleStyle,
                 ),
-                icon: Icon(Icons.next_plan),
+                icon: const Icon(
+                  Icons.next_plan,
+                  color: Colors.white,
+                ),
                 onPressed: () {
                   Navigator.of(context).pushNamed('saveScreen');
                 },

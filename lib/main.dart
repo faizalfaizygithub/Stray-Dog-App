@@ -5,6 +5,8 @@ import 'package:stray_dog_app/Application/Widgets/mainScreens/adminPanel.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/camLocaScreen.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/finalScreen.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/homeScreen.dart';
+import 'package:stray_dog_app/Application/Widgets/mainScreens/login_page.dart';
+import 'package:stray_dog_app/Application/Widgets/mainScreens/signUp_Page.dart';
 
 import 'firebase_options.dart';
 
@@ -24,21 +26,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
+        'loginPage': (context) => LoginPage(),
+        'signupScreen': (context) => SignUpScreen(),
         'homeScreen': (context) => const HomeScreen(),
         'helpScreen': (context) => const HelpWaysScreen(),
         'saveScreen': (context) => const CameraLocationScreen(),
         'finalScreen': (context) => const FinalScreen(),
         'adminScreen': (context) => const AdminPanel(),
       },
+      initialRoute: 'loginPage',
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-            backgroundColor: Color.fromARGB(255, 228, 223, 223),
+            toolbarHeight: 70,
+            backgroundColor: Colors.blueGrey,
             centerTitle: true),
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)
-            .copyWith(background: Colors.white),
+            .copyWith(background: Colors.grey.shade100),
       ),
       home: const HomeScreen(),
     );

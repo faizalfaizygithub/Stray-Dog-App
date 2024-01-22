@@ -29,10 +29,17 @@ TextStyle get titleStyle {
   );
 }
 
+TextStyle get appBartitleStyle {
+  return GoogleFonts.alegreyaSansSc(
+    textStyle: const TextStyle(
+        fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+  );
+}
+
 TextStyle get smallTexts {
   return GoogleFonts.lato(
     textStyle: const TextStyle(
-        fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black87),
+        fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black54),
   );
 }
 
@@ -59,34 +66,37 @@ Widget waysCard(
 ) {
   return Card(
     margin: EdgeInsets.all(10),
-    child: Column(
-      children: [
-        gyap(10, 0),
-        Text(
-          heading,
-          style: titleStyle,
-        ),
-        gyap(10, 0),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: Container(
-            color: Colors.black,
-            height: 230,
-            width: 400,
-            child: Image.asset(
-              image,
-              fit: BoxFit.cover,
+    child: Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        children: [
+          gyap(10, 0),
+          Text(
+            heading,
+            style: titleStyle,
+          ),
+          gyap(10, 0),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              color: Colors.black,
+              height: 230,
+              width: 400,
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
-        gyap(10, 0),
-        AppText(
-          txt: text,
-          size: 12,
-          color: Colors.black,
-        ),
-        gyap(10, 0),
-      ],
+          gyap(10, 0),
+          AppText(
+            txt: text,
+            size: 12,
+            color: Colors.black,
+          ),
+          gyap(10, 0),
+        ],
+      ),
     ),
   );
 }

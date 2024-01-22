@@ -30,8 +30,8 @@ class _AdminPanelState extends State<AdminPanel> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Reports',
-          style: titleStyle,
+          'Admin Panel  \nReports of incidents',
+          style: appBartitleStyle,
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -56,7 +56,7 @@ class _AdminPanelState extends State<AdminPanel> {
                   return SingleChildScrollView(
                     child: Slidable(
                       startActionPane:
-                          ActionPane(motion: StretchMotion(), children: [
+                          ActionPane(motion: const StretchMotion(), children: [
                         SlidableAction(
                           onPressed: ((context) {
                             deleteReport(itemSnap.id);
@@ -67,7 +67,7 @@ class _AdminPanelState extends State<AdminPanel> {
                       ]),
                       child: Card(
                         elevation: 10,
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         color: Colors.white,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -84,7 +84,7 @@ class _AdminPanelState extends State<AdminPanel> {
                                           width: 100,
                                         ),
                                       )
-                                    : CircleAvatar(),
+                                    : const CircleAvatar(),
                               ),
                               Row(
                                 children: [

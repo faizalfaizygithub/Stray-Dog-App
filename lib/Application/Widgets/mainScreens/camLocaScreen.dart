@@ -77,7 +77,13 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
       appBar: AppBar(
         title: Text(
           'Report Us',
-          style: titleStyle,
+          style: appBartitleStyle,
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
       body: Padding(
@@ -176,14 +182,14 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
           ),
           gyap(5, 0),
           Card(
-            color: const Color.fromARGB(255, 228, 223, 223),
+            color: Colors.blueGrey,
             margin: const EdgeInsets.only(right: 10),
             child: TextButton.icon(
               label: Text(
                 'Submit',
                 style: titleStyle,
               ),
-              icon: const Icon(Icons.document_scanner),
+              icon: const Icon(Icons.document_scanner, color: Colors.white),
               onPressed: () async {
                 if (imageURL.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
