@@ -90,12 +90,6 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: ListView(children: [
           _animatedHeadingSec(),
-          AppText(
-            txt:
-                '"Under Stray Dog Management Rules 2001, its illegal for an individual, RWA or estate management to remove or relocate dogs. The dogs have to be sterilized and vaccinated and returned to the same area". ',
-            size: 12,
-            color: Colors.black45,
-          ),
           gyap(10, 0),
           AppText(
             txt: 'Inform us if you see Stray dogs in your Locality',
@@ -283,6 +277,7 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
                     child: InkWell(
                       onTap: () async {
                         _pickImageFromGallery();
+                        Navigator.pop(context);
                       },
                       child: Column(
                         children: [
@@ -305,6 +300,7 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
                         _pickImageFromCamera();
                         String fileName =
                             DateTime.now().microsecondsSinceEpoch.toString();
+                        Navigator.pop(context);
                       },
                       child: Column(
                         children: [

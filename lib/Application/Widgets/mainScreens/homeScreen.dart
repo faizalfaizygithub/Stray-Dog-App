@@ -34,67 +34,76 @@ class _HomeScreenState extends State<HomeScreen> {
           gyap(0, 10)
         ],
       ),
-      body: ListView(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            height: 100,
-            child: DefaultTextStyle(
-              style: const TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-              child: AnimatedTextKit(
-                repeatForever: true,
-                animatedTexts: [
-                  FadeAnimatedText('Stray Dogs!'),
-                  FadeAnimatedText('A SOCIAL RESPONSIBILITY!!'),
-                ],
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: ListView(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              height: 100,
+              child: DefaultTextStyle(
+                style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+                child: AnimatedTextKit(
+                  repeatForever: true,
+                  animatedTexts: [
+                    FadeAnimatedText('Stray Dogs!'),
+                    FadeAnimatedText('A SOCIAL RESPONSIBILITY!!'),
+                  ],
+                ),
               ),
             ),
-          ),
-          CarouselScreen(
-            photos: dogphotos,
-          ),
-          gyap(20, 0),
-          Card(
-            margin: const EdgeInsets.all(10),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text(
-                    'Stray Dogs: Our Responsibility to  Protect and Care:-',
-                    style: HeadStyle,
-                  ),
-                  AppText(
-                    txt: caption,
-                    size: 12,
-                  ),
-                  gyap(20, 0)
-                ],
+            CarouselScreen(
+              photos: dogphotos,
+            ),
+            gyap(20, 0),
+            AppText(
+              txt:
+                  '"Under Stray Dog Management Rules 2001, its illegal for an individual, RWA or estate management to remove or relocate dogs. The dogs have to be sterilized and vaccinated and returned to the same area". ',
+              size: 12,
+              color: Colors.black45,
+            ),
+            gyap(20, 0),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Stray Dogs: Our Responsibility to  Protect and Care:-',
+                      style: HeadStyle,
+                    ),
+                    AppText(
+                      txt: caption,
+                      size: 12,
+                    ),
+                    gyap(20, 0)
+                  ],
+                ),
               ),
             ),
-          ),
-          Card(
-            color: Colors.blueGrey,
-            margin: const EdgeInsets.only(right: 10),
-            child: TextButton.icon(
-              label: Text(
-                'Learn more',
-                style: titleStyle,
+            Card(
+              color: Colors.blueGrey,
+              margin: const EdgeInsets.only(right: 10),
+              child: TextButton.icon(
+                label: Text(
+                  'Learn more',
+                  style: titleStyle,
+                ),
+                icon: const Icon(
+                  Icons.next_plan,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('helpScreen');
+                },
               ),
-              icon: const Icon(
-                Icons.next_plan,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.of(context).pushNamed('helpScreen');
-              },
             ),
-          ),
-          gyap(10, 0)
-        ],
+            gyap(10, 0)
+          ],
+        ),
       ),
       drawer: Container(
         decoration: BoxDecoration(

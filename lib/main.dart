@@ -1,12 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/HelpScreen.dart';
+import 'package:stray_dog_app/Application/Widgets/mainScreens/Report_summary.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/adminPanel.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/camLocaScreen.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/finalScreen.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/homeScreen.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/login_page.dart';
 import 'package:stray_dog_app/Application/Widgets/mainScreens/signUp_Page.dart';
+import 'package:stray_dog_app/Application/Widgets/mainScreens/spalsh_screen.dart';
 
 import 'firebase_options.dart';
 
@@ -26,15 +27,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        'loginPage': (context) => LoginPage(),
+        'splashScreen': (context) => const SplashScreen(),
         'signupScreen': (context) => SignUpScreen(),
+        'loginPage': (context) => LoginPage(),
         'homeScreen': (context) => const HomeScreen(),
         'helpScreen': (context) => const HelpWaysScreen(),
         'saveScreen': (context) => const CameraLocationScreen(),
         'finalScreen': (context) => const FinalScreen(),
         'adminScreen': (context) => const AdminPanel(),
       },
-      initialRoute: 'loginPage',
+      initialRoute: 'finalScreen',
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

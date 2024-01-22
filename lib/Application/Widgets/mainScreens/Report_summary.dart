@@ -15,6 +15,7 @@ class _FinalScreenState extends State<FinalScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
@@ -36,13 +37,21 @@ class _FinalScreenState extends State<FinalScreen> {
         body: ListView(
           children: [
             gyap(20, 0),
-            Image.asset('assets/images/tnku.jpg'),
-            gyap(50, 0),
-            const Divider(
-              thickness: 5,
-              endIndent: 20,
-              indent: 20,
-              color: Colors.grey,
+            Container(
+              child: Column(
+                children: [
+                  Image.asset('assets/images/tnku.jpg'),
+                  Text(
+                    'Your submission has been received',
+                    style: smallTexts,
+                  ),
+                  gyap(20, 0),
+                  Text(
+                    '---------*---------',
+                    style: titleStyle,
+                  ),
+                ],
+              ),
             ),
             const ContactUs(),
             Card(
