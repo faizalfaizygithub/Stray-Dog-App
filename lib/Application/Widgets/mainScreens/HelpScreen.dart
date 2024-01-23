@@ -46,7 +46,7 @@ class HelpWaysScreen extends StatelessWidget {
               child: TextButton.icon(
                 label: Text(
                   'Inform Us',
-                  style: titleStyle,
+                  style: buttonStyle,
                 ),
                 icon: const Icon(
                   Icons.next_plan,

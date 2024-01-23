@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:stray_dog_app/Application/Widgets/GetInTouch.dart';
 import 'package:stray_dog_app/Application/tools/AppText.dart';
 
@@ -37,21 +38,19 @@ class _FinalScreenState extends State<FinalScreen> {
         body: ListView(
           children: [
             gyap(20, 0),
-            Container(
-              child: Column(
-                children: [
-                  Image.asset('assets/images/tnku.jpg'),
-                  Text(
-                    'Your submission has been received',
-                    style: smallTexts,
-                  ),
-                  gyap(20, 0),
-                  Text(
-                    '---------*---------',
-                    style: titleStyle,
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                Lottie.asset('assets/json/tick.json', height: 300, width: 300),
+                Text(
+                  'Your submission has been received',
+                  style: smallTexts,
+                ),
+                gyap(20, 0),
+                Text(
+                  '---------*---------',
+                  style: titleStyle,
+                ),
+              ],
             ),
             const ContactUs(),
             Card(
@@ -60,7 +59,7 @@ class _FinalScreenState extends State<FinalScreen> {
               child: TextButton.icon(
                 label: Text(
                   'Sign Out',
-                  style: titleStyle,
+                  style: buttonStyle,
                 ),
                 icon: const Icon(
                   Icons.exit_to_app_rounded,

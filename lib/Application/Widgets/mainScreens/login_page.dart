@@ -14,8 +14,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   var loading = false.obs;
 
@@ -39,14 +39,15 @@ class _LoginPageState extends State<LoginPage> {
               gyap(80, 0),
               Text(
                 'Login',
-                style: HeadStyle,
+                style: LoGinStyle,
               ),
               gyap(30, 0),
               _customTextField('Email', 'eg:faizal@gmail.com',
-                  Icons.email_rounded, _emailController),
+                  Icons.email_rounded, _emailController, Icons.more_horiz),
               gyap(20, 0),
-              _customTextField('Password', '', Icons.lock, _passwordController),
-              gyap(20, 0),
+              _customTextField('Password', '', Icons.lock, _passwordController,
+                  Icons.remove_red_eye),
+              gyap(10, 0),
               _customButton(() {
                 _signIn();
               }, 'Login', Colors.blueGrey, Colors.white)
@@ -113,26 +114,43 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _customTextField(String labeltxt, String hinttxt, IconData icon,
-      TextEditingController controller) {
-    return Column(children: [
-      Padding(
-        padding: const EdgeInsets.only(left: 30.0, right: 30),
-        child: TextField(
-          controller: controller,
-          keyboardType: TextInputType.text,
-          enabled: true,
-          decoration: InputDecoration(
-              prefixIcon: Icon(icon),
-              enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.black26,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
+      TextEditingController controller, IconData suffxicon) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: 52,
+          width: 300,
+          alignment: Alignment.center,
+          child: TextField(
+            style: const TextStyle(fontSize: 12, height: 2),
+            cursorHeight: 20,
+            cursorColor: Colors.black54,
+            controller: controller,
+            keyboardType: TextInputType.text,
+            enabled: true,
+            decoration: InputDecoration(
+              isCollapsed: true,
+              filled: true,
+              fillColor: Colors.grey.shade200,
+              prefixIcon: Icon(
+                icon,
+                color: Colors.blueGrey,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey.shade200,
+                  width: 2,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.blue,
-                  width: 2,
+                  width: 1,
                 ),
                 borderRadius: BorderRadius.all(
                   Radius.circular(20),
@@ -141,17 +159,23 @@ class _LoginPageState extends State<LoginPage> {
               labelText: labeltxt,
               labelStyle: const TextStyle(
                 color: Colors.blueGrey,
-                fontSize: 14,
+                fontSize: 10,
               ),
               hintText: hinttxt,
               hintStyle: const TextStyle(
                 color: Colors.black54,
-                fontSize: 11,
+                fontSize: 10,
               ),
-              suffixText: 'OK'),
+              suffixIcon: Icon(
+                suffxicon,
+                size: 20,
+                color: Colors.black54,
+              ),
+            ),
+          ),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 
   Widget _customButton(
@@ -166,14 +190,14 @@ class _LoginPageState extends State<LoginPage> {
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(buttonColor),
           minimumSize: MaterialStateProperty.all(
-            const Size(250, 50),
+            const Size(250, 45),
           ),
         ),
         child: loading.value
             ? const CircularProgressIndicator(color: Colors.white)
             : Text(
                 buttonText,
-                style: TextStyle(fontSize: 15, color: txtColor),
+                style: TextStyle(fontSize: 14, color: txtColor),
               ),
       ),
     );

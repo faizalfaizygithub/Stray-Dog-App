@@ -25,14 +25,21 @@ class AppText extends StatelessWidget {
 TextStyle get titleStyle {
   return GoogleFonts.lato(
     textStyle: const TextStyle(
-        fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87),
+        fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black87),
+  );
+}
+
+TextStyle get buttonStyle {
+  return GoogleFonts.lato(
+    textStyle: const TextStyle(
+        fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
   );
 }
 
 TextStyle get appBartitleStyle {
   return GoogleFonts.alegreyaSansSc(
     textStyle: const TextStyle(
-        fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+        fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
   );
 }
 
@@ -51,11 +58,16 @@ Widget gyap(final double? hgyap, final double? wgyap) {
 }
 
 TextStyle get HeadStyle {
-  return GoogleFonts.lato(
+  return GoogleFonts.aBeeZee(
     textStyle: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-        color: Color.fromARGB(255, 48, 32, 32)),
+        fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blueGrey),
+  );
+}
+
+TextStyle get LoGinStyle {
+  return GoogleFonts.aBeeZee(
+    textStyle: const TextStyle(
+        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueGrey),
   );
 }
 

@@ -33,6 +33,12 @@ class _AdminPanelState extends State<AdminPanel> {
           'Admin Panel  \nReports of incidents',
           style: appBartitleStyle,
         ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _stream,
@@ -94,9 +100,11 @@ class _AdminPanelState extends State<AdminPanel> {
                                     fw: FontWeight.bold,
                                   ),
                                   gyap(0, 20),
-                                  Text(
-                                    '${thisItems['name']}',
-                                    style: smallTexts,
+                                  Expanded(
+                                    child: Text(
+                                      '${thisItems['name']}',
+                                      style: smallTexts,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -108,9 +116,11 @@ class _AdminPanelState extends State<AdminPanel> {
                                     fw: FontWeight.bold,
                                   ),
                                   gyap(0, 20),
-                                  Text(
-                                    '${thisItems['email'].toString()}',
-                                    style: smallTexts,
+                                  Expanded(
+                                    child: Text(
+                                      '${thisItems['email'].toString()}',
+                                      style: smallTexts,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -122,9 +132,11 @@ class _AdminPanelState extends State<AdminPanel> {
                                     fw: FontWeight.bold,
                                   ),
                                   gyap(0, 20),
-                                  Text(
-                                    '${thisItems['location'].toString()}',
-                                    style: smallTexts,
+                                  Expanded(
+                                    child: Text(
+                                      '${thisItems['location'].toString()}',
+                                      style: smallTexts,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -136,9 +148,11 @@ class _AdminPanelState extends State<AdminPanel> {
                                     fw: FontWeight.bold,
                                   ),
                                   gyap(0, 20),
-                                  Text(
-                                    '${thisItems['value'].toString()}',
-                                    style: smallTexts,
+                                  Expanded(
+                                    child: Text(
+                                      '${thisItems['value'].toString()}',
+                                      style: smallTexts,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -150,9 +164,11 @@ class _AdminPanelState extends State<AdminPanel> {
                                     fw: FontWeight.bold,
                                   ),
                                   gyap(0, 20),
-                                  Text(
-                                    '${thisItems['incident']}',
-                                    style: smallTexts,
+                                  Expanded(
+                                    child: Text(
+                                      '${thisItems['incident']}',
+                                      style: smallTexts,
+                                    ),
                                   ),
                                 ],
                               ),

@@ -35,25 +35,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
         width: MediaQuery.of(context).size.width,
         child: ListView(children: [
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: 50.0),
             child: Column(children: [
               Text(
                 'Welcome Back',
-                style: HeadStyle,
+                style: LoGinStyle,
               ),
               gyap(10, 0),
               Text(
                 'Signup your Account to access  \n our service..',
                 style: smallTexts,
               ),
-              gyap(20, 0),
-              _customTextField('username', 'eg:Muhammed Faizal', Icons.person,
-                  usernameController),
+              gyap(30, 0),
+              _customTextField('username', 'eg:Faizal', Icons.person,
+                  Icons.more_horiz, usernameController),
               gyap(20, 0),
               _customTextField(
                 'email',
-                'eg:faizalfaizy648@gmail.com',
+                'eg:faizal123@gmail.com',
                 Icons.email,
+                Icons.more_horiz,
                 _emailController,
               ),
               gyap(20, 0),
@@ -61,12 +62,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 'password',
                 '',
                 Icons.lock,
+                Icons.remove_red_eye,
                 _passwordController,
               ),
               gyap(20, 0),
               _customButton(() {
                 _signUp();
-              }, 'Sign Up', Colors.blueGrey, Colors.white)
+              }, 'Create account', Colors.blueGrey, Colors.white)
             ]),
           ),
           Row(
@@ -114,43 +116,58 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String labeltxt,
     String hinttxt,
     IconData icon,
+    IconData suffxicon,
     TextEditingController controller,
   ) {
     return Column(children: [
-      Padding(
-        padding: const EdgeInsets.only(left: 30.0, right: 30),
+      Container(
+        height: 52,
+        width: 300,
         child: TextField(
+          style: TextStyle(fontSize: 12, height: 2),
+          cursorHeight: 20,
+          cursorColor: Colors.black54,
           controller: controller,
           keyboardType: TextInputType.text,
           enabled: true,
           decoration: InputDecoration(
-              prefixIcon: Icon(icon),
-              enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.black26,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              focusedBorder: const OutlineInputBorder(
+            isCollapsed: true,
+            filled: true,
+            fillColor: Colors.grey.shade200,
+            prefixIcon: Icon(
+              icon,
+              color: Colors.blueGrey,
+            ),
+            enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.blue,
-                  width: 2,
+                  color: Colors.grey.shade200,
                 ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.blue,
+                width: 1,
               ),
-              labelText: labeltxt,
-              labelStyle: const TextStyle(
-                color: Colors.blueGrey,
-                fontSize: 13,
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
               ),
-              hintText: hinttxt,
-              hintStyle: const TextStyle(
-                color: Colors.black54,
-                fontSize: 10,
-              ),
-              suffixText: 'OK'),
+            ),
+            labelText: labeltxt,
+            labelStyle: const TextStyle(
+              color: Colors.blueGrey,
+              fontSize: 10,
+            ),
+            hintText: hinttxt,
+            hintStyle: const TextStyle(
+              color: Colors.black54,
+              fontSize: 10,
+            ),
+            suffixIcon: Icon(
+              suffxicon,
+              size: 20,
+              color: Colors.black54,
+            ),
+          ),
         ),
       ),
     ]);
@@ -168,14 +185,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(buttonColor),
           minimumSize: MaterialStateProperty.all(
-            const Size(250, 50),
+            const Size(250, 45),
           ),
         ),
         child: loading.value
             ? const CircularProgressIndicator(color: Colors.white)
             : Text(
                 buttonText,
-                style: TextStyle(fontSize: 15, color: txtColor),
+                style: TextStyle(fontSize: 14, color: txtColor),
               ),
       ),
     );

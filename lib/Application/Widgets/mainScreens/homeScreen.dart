@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:stray_dog_app/Application/Widgets/carousel.dart';
 import 'package:stray_dog_app/Application/tools/AppText.dart';
 import 'package:stray_dog_app/Application/tools/asset.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +15,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   FirebaseAuth auth = FirebaseAuth.instance;
+  final Uri _url = Uri.parse(
+      'https://malappuram.nic.in/en/animal-husbandary-department-new/');
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: TextButton.icon(
                 label: Text(
                   'Learn more',
-                  style: titleStyle,
+                  style: buttonStyle,
                 ),
                 icon: const Icon(
                   Icons.next_plan,
@@ -113,9 +116,15 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _drawerList(Icons.home, 'Home', () => null),
-            _drawerList(Icons.person, 'About', () => null),
-            _drawerList(Icons.report, 'Report', () => null),
+            _drawerList(Icons.home, 'Home', () {
+              Navigator.pop(context);
+            }),
+            _drawerList(Icons.person, 'About Us', () {
+              _launchUrl();
+            }),
+            _drawerList(Icons.report, 'Report', () {
+              Navigator.pushNamed(context, 'saveScreen');
+            }),
             _drawerList(Icons.feedback, 'FeedBack', () => null),
           ],
         ),
@@ -136,5 +145,11 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.blueGrey,
           fw: FontWeight.w700,
         ));
+  }
+
+  Future<void> _launchUrl() async {
+    if (await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 }

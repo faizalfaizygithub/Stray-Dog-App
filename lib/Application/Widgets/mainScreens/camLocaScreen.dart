@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stray_dog_app/Application/tools/AppText.dart';
 
@@ -25,6 +26,7 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
       FirebaseFirestore.instance.collection('report');
 
   String imageURL = '';
+  var loading = false.obs;
 
   void addReport() {
     final data = {
@@ -92,10 +94,9 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
           _animatedHeadingSec(),
           gyap(10, 0),
           AppText(
-            txt: 'Inform us if you see Stray dogs in your Locality',
-            size: 13,
-            color: const Color.fromARGB(255, 16, 148, 236),
-          ),
+              txt: 'Inform us if you see Stray dogs in your Locality',
+              size: 13,
+              color: const Color.fromARGB(255, 15, 106, 180)),
           _image != null
               ? Expanded(
                   child: CircleAvatar(
@@ -175,29 +176,40 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
             _reportController,
           ),
           gyap(5, 0),
-          Card(
-            color: Colors.blueGrey,
-            margin: const EdgeInsets.only(right: 10),
-            child: TextButton.icon(
-              label: Text(
-                'Submit',
-                style: titleStyle,
+          Obx(
+            () => Card(
+              color: Colors.blueGrey,
+              margin: const EdgeInsets.only(right: 10),
+              child: TextButton.icon(
+                label: loading.value
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : Text(
+                        'Submit',
+                        style: buttonStyle,
+                      ),
+                icon: const Icon(Icons.document_scanner, color: Colors.white),
+                onPressed: () async {
+                  try {
+                    loading.value = true;
+                    if (imageURL.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please Select and Upload Image'),
+                        ),
+                      );
+                      loading.value = false;
+                      return;
+                    }
+
+                    addReport();
+
+                    Navigator.of(context).pushReplacementNamed('finalScreen');
+                    loading.value = false;
+                  } catch (e) {
+                    print('go to final page');
+                  }
+                },
               ),
-              icon: const Icon(Icons.document_scanner, color: Colors.white),
-              onPressed: () async {
-                if (imageURL.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Please Select and Upload Image'),
-                    ),
-                  );
-                  return;
-                }
-
-                addReport();
-
-                Navigator.of(context).pushNamed('finalScreen');
-              },
             ),
           ),
           gyap(10, 0),
