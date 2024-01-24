@@ -122,7 +122,6 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           height: 52,
           width: 300,
-          alignment: Alignment.center,
           child: TextField(
             style: const TextStyle(fontSize: 12, height: 2),
             cursorHeight: 20,
