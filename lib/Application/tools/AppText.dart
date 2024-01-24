@@ -67,7 +67,7 @@ TextStyle get HeadStyle {
 TextStyle get LoGinStyle {
   return GoogleFonts.aBeeZee(
     textStyle: const TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueGrey),
+        fontSize: 25, fontWeight: FontWeight.bold, color: Colors.blueGrey),
   );
 }
 
