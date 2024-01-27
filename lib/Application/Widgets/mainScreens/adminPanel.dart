@@ -96,7 +96,7 @@ class _AdminPanelState extends State<AdminPanel> {
                                 children: [
                                   AppText(
                                     txt: 'Name:',
-                                    size: 15,
+                                    size: 13,
                                     fw: FontWeight.bold,
                                   ),
                                   gyap(0, 20),
@@ -111,14 +111,14 @@ class _AdminPanelState extends State<AdminPanel> {
                               Row(
                                 children: [
                                   AppText(
-                                    txt: 'Email:',
-                                    size: 15,
+                                    txt: 'Phone:',
+                                    size: 13,
                                     fw: FontWeight.bold,
                                   ),
                                   gyap(0, 20),
                                   Expanded(
                                     child: Text(
-                                      '${thisItems['email'].toString()}',
+                                      '${thisItems['phone'].toString()}',
                                       style: smallTexts,
                                     ),
                                   ),
@@ -128,7 +128,7 @@ class _AdminPanelState extends State<AdminPanel> {
                                 children: [
                                   AppText(
                                     txt: 'Location:',
-                                    size: 15,
+                                    size: 13,
                                     fw: FontWeight.bold,
                                   ),
                                   gyap(0, 20),
@@ -144,7 +144,7 @@ class _AdminPanelState extends State<AdminPanel> {
                                 children: [
                                   AppText(
                                     txt: 'Value:',
-                                    size: 15,
+                                    size: 13,
                                     fw: FontWeight.bold,
                                   ),
                                   gyap(0, 20),
@@ -160,7 +160,7 @@ class _AdminPanelState extends State<AdminPanel> {
                                 children: [
                                   AppText(
                                     txt: 'Report:',
-                                    size: 15,
+                                    size: 13,
                                     fw: FontWeight.bold,
                                   ),
                                   gyap(0, 20),

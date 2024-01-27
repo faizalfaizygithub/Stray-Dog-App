@@ -19,9 +19,9 @@ class CameraLocationScreen extends StatefulWidget {
 }
 
 class _CameraLocationScreenState extends State<CameraLocationScreen> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _reportController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _reportController = TextEditingController();
   final CollectionReference _items =
       FirebaseFirestore.instance.collection('report');
 
@@ -31,7 +31,7 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
   void addReport() {
     final data = {
       'name': _nameController.text,
-      'email': _emailController.text,
+      'phone': _phoneController.text,
       'incident': _reportController.text,
       'image': imageURL,
       'location': _currentAddress,
@@ -88,133 +88,127 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
           icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10),
-        child: ListView(children: [
-          _animatedHeadingSec(),
-          gyap(10, 0),
-          AppText(
-              txt: 'Inform us if you see Stray dogs in your Locality',
-              size: 13,
-              color: const Color.fromARGB(255, 15, 106, 180)),
-          _image != null
-              ? Expanded(
-                  child: CircleAvatar(
-                    radius: 100,
-                    backgroundImage: MemoryImage(_image!),
-                  ),
-                )
-              : const Expanded(
-                  child: CircleAvatar(
-                    radius: 100,
-                    backgroundImage: AssetImage(
-                      'assets/images/savedog.jpg',
-                    ),
+      body: ListView(padding: const EdgeInsets.all(20), children: [
+        _animatedHeadingSec(),
+        gyap(10, 0),
+        AppText(
+            txt: 'Inform us if you see Stray dogs in your Locality',
+            size: 13,
+            color: const Color.fromARGB(255, 10, 93, 104)),
+        _image != null
+            ? Expanded(
+                child: CircleAvatar(
+                  radius: 100,
+                  backgroundImage: MemoryImage(_image!),
+                ),
+              )
+            : const Expanded(
+                child: CircleAvatar(
+                  radius: 100,
+                  backgroundImage: AssetImage(
+                    'assets/images/savedog.jpg',
                   ),
                 ),
-          OutlinedButton.icon(
-            label: AppText(
-              txt: 'Add Stray dog photo',
-              size: 10,
-              color: Colors.black54,
-            ),
-            onPressed: () {
-              showImagePickerOption(context);
-            },
-            icon: const Icon(
-              Icons.add_a_photo,
-              color: Colors.blue,
-            ),
-          ),
-          OutlinedButton.icon(
-            onPressed: () async {
-              _currentLocation = await _getCurrentLocation();
-              await _getAddressFromCoordinates();
-              print("${_currentLocation}");
-              print("${_currentAddress}");
-            },
-            icon: const Icon(
-              Icons.location_pin,
-              color: Colors.red,
-            ),
-            label: AppText(
-                txt: 'Get Current Location', size: 10, color: Colors.black54),
-          ),
-          AppText(
-            txt: 'Location Address',
-            fw: FontWeight.bold,
-          ),
-          AppText(
-            txt: "${_currentAddress}",
-            size: 12,
-          ),
-          AppText(
-            txt: 'Location Coordinates',
-            fw: FontWeight.bold,
-          ),
-          AppText(
-            txt:
-                "Latitude =${_currentLocation?.latitude}; Longitude=${_currentLocation?.longitude}",
-            size: 10,
-          ),
-          gyap(10, 0),
-          _customTextField(
-            'Name',
-            1,
-            _nameController,
-          ),
-          gyap(2, 0),
-          _customTextField(
-            'Email',
-            1,
-            _emailController,
-          ),
-          gyap(2, 0),
-          _customTextField(
-            'Report',
-            4,
-            _reportController,
-          ),
-          gyap(5, 0),
-          Obx(
-            () => Card(
-              color: Colors.blueGrey,
-              margin: const EdgeInsets.only(right: 10),
-              child: TextButton.icon(
-                label: loading.value
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : Text(
-                        'Submit',
-                        style: buttonStyle,
-                      ),
-                icon: const Icon(Icons.document_scanner, color: Colors.white),
-                onPressed: () async {
-                  try {
-                    loading.value = true;
-                    if (imageURL.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please Select and Upload Image'),
-                        ),
-                      );
-                      loading.value = false;
-                      return;
-                    }
-
-                    addReport();
-
-                    Navigator.of(context).pushReplacementNamed('finalScreen');
-                    loading.value = false;
-                  } catch (e) {
-                    print('go to final page');
-                  }
-                },
               ),
+        OutlinedButton.icon(
+          label: AppText(
+            txt: 'Add Stray dog photo',
+            size: 10,
+            color: Colors.black54,
+          ),
+          onPressed: () {
+            showImagePickerOption(context);
+          },
+          icon: const Icon(
+            Icons.add_a_photo,
+            color: Colors.blue,
+          ),
+        ),
+        OutlinedButton.icon(
+          onPressed: () async {
+            _currentLocation = await _getCurrentLocation();
+            await _getAddressFromCoordinates();
+            print("${_currentLocation}");
+            print("${_currentAddress}");
+          },
+          icon: const Icon(
+            Icons.location_pin,
+            color: Colors.red,
+          ),
+          label: AppText(
+              txt: 'Get Current Location', size: 10, color: Colors.black54),
+        ),
+        AppText(
+          txt: 'Location Address',
+          fw: FontWeight.bold,
+        ),
+        AppText(
+          txt: "${_currentAddress}",
+          size: 12,
+        ),
+        AppText(
+          txt: 'Location Coordinates',
+          fw: FontWeight.bold,
+        ),
+        AppText(
+          txt:
+              "Latitude =${_currentLocation?.latitude}; Longitude=${_currentLocation?.longitude}",
+          size: 10,
+        ),
+        gyap(10, 0),
+        _customTextField(
+          'Name',
+          1,
+          _nameController,
+        ),
+        gyap(5, 0),
+        _customTextField(
+          'Phone',
+          1,
+          _phoneController,
+        ),
+        gyap(5, 0),
+        _customTextField(
+          'Report',
+          4,
+          _reportController,
+        ),
+        gyap(8, 0),
+        Obx(
+          () => Card(
+            color: Colors.blueGrey,
+            child: TextButton.icon(
+              label: loading.value
+                  ? const CircularProgressIndicator(color: Colors.white)
+                  : Text(
+                      'Submit',
+                      style: buttonStyle,
+                    ),
+              icon: const Icon(Icons.document_scanner, color: Colors.white),
+              onPressed: () async {
+                try {
+                  loading.value = true;
+                  if (imageURL.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please Select and Upload Image'),
+                      ),
+                    );
+                    loading.value = false;
+                    return;
+                  }
+
+                  addReport();
+
+                  Navigator.of(context).pushReplacementNamed('finalScreen');
+                  loading.value = false;
+                } catch (e) {}
+              },
             ),
           ),
-          gyap(10, 0),
-        ]),
-      ),
+        ),
+        gyap(10, 0),
+      ]),
     );
   }
 
@@ -223,45 +217,48 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
     int count,
     final dynamic controller,
   ) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        controller: controller,
-        keyboardType: TextInputType.text,
-        decoration: InputDecoration(
-          label: AppText(
-            txt: textName,
-            size: 14,
-          ),
-          labelStyle: const TextStyle(color: Colors.grey),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade200,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: Colors.blueAccent,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
+    return TextField(
+      controller: controller,
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.grey.shade100,
+        label: AppText(
+          txt: textName,
+          size: 12,
         ),
-        maxLines: count,
+        labelStyle: const TextStyle(color: Colors.grey),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey.shade200,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Colors.blueAccent,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
+      maxLines: count,
     );
   }
 
   _animatedHeadingSec() {
     return Container(
-      margin: const EdgeInsets.only(left: 30, top: 10, bottom: 10),
-      height: 30,
-      width: 350,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.blueGrey, width: 2),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      height: 50,
+      width: 250,
       child: DefaultTextStyle(
         style: const TextStyle(
-            fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+            fontSize: 20.0, color: Colors.black54, fontWeight: FontWeight.bold),
         child: AnimatedTextKit(
           pause: const Duration(milliseconds: 200),
           repeatForever: true,
