@@ -40,22 +40,21 @@ class HelpWaysScreen extends StatelessWidget {
                 'assets/images/sadDog.jpg', caption5),
             waysCard("6.Provide food and water", 'assets/images/dogfeed.webp',
                 caption6),
-            Card(
-              color: Colors.blueGrey,
-              margin: const EdgeInsets.only(right: 10),
-              child: TextButton.icon(
-                label: Text(
-                  'Inform Us',
-                  style: buttonStyle,
-                ),
-                icon: const Icon(
-                  Icons.next_plan,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed('saveScreen');
-                },
+            TextButton.icon(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                  fixedSize: MaterialStateProperty.all(Size(300, 50))),
+              label: Text(
+                'Inform Us',
+                style: buttonStyle,
               ),
+              icon: const Icon(
+                Icons.next_plan,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed('saveScreen');
+              },
             ),
             gyap(10, 0)
           ],

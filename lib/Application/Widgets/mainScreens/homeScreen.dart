@@ -87,22 +87,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Card(
-              color: Colors.blueGrey,
-              margin: const EdgeInsets.only(right: 10),
-              child: TextButton.icon(
-                label: Text(
-                  'Learn more',
-                  style: buttonStyle,
-                ),
-                icon: const Icon(
-                  Icons.next_plan,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed('helpScreen');
-                },
+            TextButton.icon(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                  fixedSize: MaterialStateProperty.all(Size(300, 50))),
+              label: Text(
+                'Learn more',
+                style: buttonStyle,
               ),
+              icon: const Icon(
+                Icons.next_plan,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed('helpScreen');
+              },
             ),
             gyap(10, 0)
           ],

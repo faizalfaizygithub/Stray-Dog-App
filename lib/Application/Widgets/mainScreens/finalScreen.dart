@@ -53,23 +53,25 @@ class _FinalScreenState extends State<FinalScreen> {
               ],
             ),
             const ContactUs(),
-            Card(
-              color: Colors.blueGrey,
-              margin: const EdgeInsets.only(right: 10),
-              child: TextButton.icon(
-                label: Text(
-                  'Sign Out',
-                  style: buttonStyle,
+            TextButton.icon(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                fixedSize: MaterialStateProperty.all(
+                  Size(300, 50),
                 ),
-                icon: const Icon(
-                  Icons.exit_to_app_rounded,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pushNamed('loginPage');
-                },
               ),
+              label: Text(
+                'Sign Out',
+                style: buttonStyle,
+              ),
+              icon: const Icon(
+                Icons.exit_to_app_rounded,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushNamed('loginPage');
+              },
             ),
           ],
         ),
