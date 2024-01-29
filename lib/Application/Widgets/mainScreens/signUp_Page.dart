@@ -123,9 +123,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Container(
         height: 52,
         width: 300,
+        alignment: Alignment.centerLeft,
         child: TextField(
-          style: TextStyle(fontSize: 12, height: 2),
-          cursorHeight: 20,
+          strutStyle: StrutStyle(fontSize: 10, height: 3.5),
+          cursorHeight: 15,
           cursorColor: Colors.black54,
           controller: controller,
           keyboardType: TextInputType.text,
