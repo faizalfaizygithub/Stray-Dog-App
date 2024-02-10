@@ -182,8 +182,11 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
             Obx(
               () => TextButton.icon(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
-                    fixedSize: MaterialStateProperty.all(Size(300, 50))),
+                  backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                  fixedSize: MaterialStateProperty.all(
+                    Size(300, 50),
+                  ),
+                ),
                 label: loading.value
                     ? const CircularProgressIndicator(color: Colors.white)
                     : Text(

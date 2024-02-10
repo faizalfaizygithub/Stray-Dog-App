@@ -44,7 +44,6 @@ class _LoginPageState extends State<LoginPage> {
               gyap(30, 0),
               _customTextField('Email', 'eg:faizal@gmail.com',
                   Icons.email_rounded, _emailController, Icons.more_horiz),
-              gyap(20, 0),
               _customTextField('Password', '', Icons.lock, _passwordController,
                   Icons.remove_red_eye),
               gyap(10, 0),
@@ -115,23 +114,20 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _customTextField(String labeltxt, String hinttxt, IconData icon,
       TextEditingController controller, IconData suffxicon) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          height: 52,
-          width: 300,
-          alignment: Alignment.center,
-          child: TextField(
-            strutStyle: StrutStyle(fontSize: 10, height: 3.5),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          TextField(
+            style: TextStyle(fontSize: 12),
             cursorHeight: 20,
             cursorColor: Colors.black54,
             controller: controller,
             keyboardType: TextInputType.text,
             enabled: true,
             decoration: InputDecoration(
-              isCollapsed: true,
               filled: true,
               fillColor: Colors.grey.shade200,
               prefixIcon: Icon(
@@ -173,8 +169,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

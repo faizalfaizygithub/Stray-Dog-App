@@ -46,10 +46,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 'Signup your Account to access  \n our service..',
                 style: smallTexts,
               ),
-              gyap(30, 0),
+              gyap(20, 0),
               _customTextField('username', 'eg:Faizal', Icons.person,
                   Icons.more_horiz, usernameController),
-              gyap(20, 0),
               _customTextField(
                 'email',
                 'eg:faizal123@gmail.com',
@@ -57,7 +56,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Icons.more_horiz,
                 _emailController,
               ),
-              gyap(20, 0),
               _customTextField(
                 'password',
                 '',
@@ -119,20 +117,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
     IconData suffxicon,
     TextEditingController controller,
   ) {
-    return Column(children: [
-      Container(
-        height: 52,
-        width: 300,
-        alignment: Alignment.centerLeft,
-        child: TextField(
-          strutStyle: StrutStyle(fontSize: 10, height: 3.5),
-          cursorHeight: 15,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+      child: Column(children: [
+        TextField(
+          style: TextStyle(fontSize: 12),
           cursorColor: Colors.black54,
           controller: controller,
           keyboardType: TextInputType.text,
+          cursorHeight: 20,
           enabled: true,
           decoration: InputDecoration(
-            isCollapsed: true,
             filled: true,
             fillColor: Colors.grey.shade200,
             prefixIcon: Icon(
@@ -170,8 +165,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ),
-      ),
-    ]);
+      ]),
+    );
   }
 
   Widget _customButton(
