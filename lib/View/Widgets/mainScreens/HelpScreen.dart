@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stray_dog_app/Application/tools/AppText.dart';
-import 'package:stray_dog_app/Application/tools/asset.dart';
+import 'package:stray_dog_app/View/tools/AppText.dart';
+import 'package:stray_dog_app/View/tools/asset.dart';
 
 class HelpWaysScreen extends StatelessWidget {
   const HelpWaysScreen({super.key});

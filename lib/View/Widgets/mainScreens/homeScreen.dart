@@ -1,9 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:stray_dog_app/Application/Widgets/carousel.dart';
-import 'package:stray_dog_app/Application/tools/AppText.dart';
-import 'package:stray_dog_app/Application/tools/asset.dart';
+import 'package:stray_dog_app/View/tools/AppText.dart';
+import 'package:stray_dog_app/View/tools/asset.dart';
+import 'package:stray_dog_app/View/tools/carousel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {

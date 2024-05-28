@@ -1,13 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/HelpScreen.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/adminPanel.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/camLocaScreen.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/finalScreen.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/homeScreen.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/login_page.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/signUp_Page.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/spalsh_screen.dart';
+import 'package:stray_dog_app/View/Widgets/mainScreens/HelpScreen.dart';
+import 'package:stray_dog_app/View/Widgets/mainScreens/adminPanel.dart';
+import 'package:stray_dog_app/View/Widgets/mainScreens/camLocaScreen.dart';
+import 'package:stray_dog_app/View/Widgets/mainScreens/finalScreen.dart';
+import 'package:stray_dog_app/View/Widgets/mainScreens/homeScreen.dart';
+import 'package:stray_dog_app/View/Widgets/mainScreens/login_page.dart';
+import 'package:stray_dog_app/View/Widgets/mainScreens/signUp_Page.dart';
+import 'package:stray_dog_app/View/Widgets/mainScreens/spalsh_screen.dart';
 
 import 'firebase_options.dart';
 

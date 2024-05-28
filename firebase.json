@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "savestraydogs-123-85363",
+    "site": "savestraydogs-123",
     "public": "build/web",
     "ignore": [
       "firebase.json",

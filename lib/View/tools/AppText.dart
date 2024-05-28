@@ -36,6 +36,13 @@ TextStyle get buttonStyle {
   );
 }
 
+TextStyle get buttonStyleForAuth {
+  return GoogleFonts.lato(
+    textStyle: const TextStyle(
+        fontSize: 12, fontWeight: FontWeight.bold, color: Colors.blueGrey),
+  );
+}
+
 TextStyle get appBartitleStyle {
   return GoogleFonts.alegreyaSansSc(
     textStyle: const TextStyle(
@@ -46,7 +53,7 @@ TextStyle get appBartitleStyle {
 TextStyle get smallTexts {
   return GoogleFonts.lato(
     textStyle: const TextStyle(
-        fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black54),
+        fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black54),
   );
 }
 
@@ -67,7 +74,7 @@ TextStyle get HeadStyle {
 TextStyle get LoGinStyle {
   return GoogleFonts.aBeeZee(
     textStyle: const TextStyle(
-        fontSize: 25, fontWeight: FontWeight.bold, color: Colors.blueGrey),
+        fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
   );
 }
 

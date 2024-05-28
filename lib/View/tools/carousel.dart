@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stray_dog_app/Application/tools/AppText.dart';
+import 'package:stray_dog_app/View/tools/AppText.dart';
 
 class CarouselScreen extends StatefulWidget {
   final dynamic photos;

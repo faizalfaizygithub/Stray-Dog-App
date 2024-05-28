@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:stray_dog_app/Application/Widgets/GetInTouch.dart';
-import 'package:stray_dog_app/Application/tools/AppText.dart';
+import 'package:stray_dog_app/View/tools/AppText.dart';
+import 'package:stray_dog_app/View/tools/GetInTouch.dart';
 
 class FinalScreen extends StatefulWidget {
   const FinalScreen({super.key});
@@ -22,7 +22,7 @@ class _FinalScreenState extends State<FinalScreen> {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('adminScreen');
+                  // Navigator.of(context).pushNamed('adminScreen');
                 },
                 icon: const Icon(
                   Icons.admin_panel_settings_rounded,

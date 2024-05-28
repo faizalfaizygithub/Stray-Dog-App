@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stray_dog_app/Application/Widgets/mainScreens/signUp_Page.dart';
+import 'package:stray_dog_app/View/Widgets/mainScreens/signUp_Page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

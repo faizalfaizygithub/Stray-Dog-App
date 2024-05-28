@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:stray_dog_app/Application/tools/AppText.dart';
+import 'package:stray_dog_app/View/tools/AppText.dart';
 
 class AdminPanel extends StatefulWidget {
   const AdminPanel({super.key});
@@ -81,10 +81,10 @@ class _AdminPanelState extends State<AdminPanel> {
                             children: [
                               CircleAvatar(
                                 radius: 50,
-                                child: thisItems.containsKey('image')
+                                child: thisItems.containsKey('imageURL')
                                     ? ClipOval(
                                         child: Image.network(
-                                          '${thisItems['image']}',
+                                          '${thisItems['imageURL']}',
                                           fit: BoxFit.cover,
                                           height: 100,
                                           width: 100,
