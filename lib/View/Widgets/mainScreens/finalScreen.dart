@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stray_dog_app/View/tools/AppText.dart';
 import 'package:stray_dog_app/View/tools/GetInTouch.dart';
+import 'package:stray_dog_app/View/tools/my_button.dart';
 
 class FinalScreen extends StatefulWidget {
   const FinalScreen({super.key});
@@ -53,29 +54,65 @@ class _FinalScreenState extends State<FinalScreen> {
               ],
             ),
             const ContactUs(),
-            TextButton.icon(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
-                fixedSize: MaterialStateProperty.all(
-                  Size(300, 50),
-                ),
-              ),
-              label: Text(
-                'Sign Out',
-                style: buttonStyle,
-              ),
-              icon: const Icon(
-                Icons.exit_to_app_rounded,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.of(context).pushNamed('loginPage');
-              },
-            ),
+            // TextButton.icon(
+            //   style: ButtonStyle(
+            //     backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+            //     fixedSize: MaterialStateProperty.all(
+            //       Size(300, 50),
+            //     ),
+            //   ),
+            //   label: Text(
+            //     'Sign Out',
+            //     style: buttonStyle,
+            //   ),
+            //   icon: const Icon(
+            //     Icons.exit_to_app_rounded,
+            //     color: Colors.white,
+            //   ),
+            //   onPressed: () {
+            //     FirebaseAuth.instance.signOut();
+            //     Navigator.of(context).pushNamed('loginPage');
+            //   },
+            // ),
+
+            MyButton(
+                buttonText: 'Sign Out',
+                ontap: () {
+                  signout();
+                },
+                buttoncolor: Colors.blueGrey,
+                textStyle: buttonStyle),
           ],
         ),
       ),
     );
+  }
+
+  signout() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              'Are you sure want to sign out?',
+              style: smallTexts,
+            ),
+            actions: [
+              MaterialButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('N0'),
+              ),
+              MaterialButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushReplacementNamed('loginPage');
+                },
+                child: Text('YES'),
+              ),
+            ],
+          );
+        });
   }
 }

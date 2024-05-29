@@ -43,7 +43,7 @@ class _SignUpScreenState extends State<LoginPage> {
               end: Alignment.bottomRight),
         ),
         child: ListView(
-            padding: EdgeInsets.only(top: 50, left: 20, right: 20),
+            padding: EdgeInsets.only(top: 80, left: 20, right: 20),
             children: [
               Align(
                 alignment: Alignment.bottomCenter,
@@ -105,14 +105,14 @@ class _SignUpScreenState extends State<LoginPage> {
                 height: 20,
               ),
               Text(
-                ' ----------  Or Login with  ----------',
+                ' ----------  Or Login with  -------------',
                 style: smallTexts,
               ),
               SizedBox(
                 height: 20,
               ),
               GoogleAuthButton(
-                  img: 'assets/auth/g.webp', txt: 'Continue with google'),
+                  img: 'assets/auth/g.webp', txt: 'continue with google'),
               SizedBox(
                 height: 20,
               ),

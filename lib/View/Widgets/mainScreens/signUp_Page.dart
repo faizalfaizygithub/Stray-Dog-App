@@ -43,7 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               end: Alignment.bottomRight),
         ),
         child: ListView(
-            padding: EdgeInsets.only(top: 50, left: 20, right: 20),
+            padding: EdgeInsets.only(top: 80, left: 20, right: 20),
             children: [
               Align(
                 alignment: Alignment.bottomCenter,

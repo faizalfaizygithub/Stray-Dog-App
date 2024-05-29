@@ -10,6 +10,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:stray_dog_app/Controller/getX/report.dart';
+import 'package:stray_dog_app/View/Widgets/mainScreens/finalScreen.dart';
 import 'package:stray_dog_app/View/tools/AppText.dart';
 
 class CameraLocationScreen extends StatefulWidget {
@@ -23,6 +25,9 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _reportController = TextEditingController();
+
+  final controller = Get.put(ReportController());
+
   final CollectionReference _items =
       FirebaseFirestore.instance.collection('report');
   void addReport(String downloadURL) {
@@ -39,8 +44,6 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
 
   PlatformFile? pickedFile;
   String downloadURL = '';
-
-  var loading = false.obs;
 
   Position? _currentLocation;
   late bool servicePermission = false;
@@ -236,27 +239,37 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
               4,
               _reportController,
             ),
-            gyap(10, 0),
-            Obx(() => TextButton.icon(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
-                  fixedSize: MaterialStateProperty.all(
-                    Size(300, 50),
+            gyap(20, 0),
+            Obx(
+              () => TextButton.icon(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                    fixedSize: MaterialStateProperty.all(
+                      Size(300, 50),
+                    ),
                   ),
-                ),
-                label: loading.value
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : Text(
-                        'Submit',
-                        style: buttonStyle,
-                      ),
-                icon: const Icon(Icons.document_scanner, color: Colors.white),
-                onPressed: () {
-                  addReport(downloadURL);
-                  Navigator.of(context).pushReplacementNamed('finalScreen');
-                  loading.value = false;
-                })),
-            gyap(5, 0),
+                  label: controller.loading.value
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : Text(
+                          'Submit',
+                          style: buttonStyle,
+                        ),
+                  icon: const Icon(Icons.document_scanner, color: Colors.white),
+                  onPressed: () async {
+                    controller.loading.value = true;
+                    await Future.delayed(const Duration(seconds: 2));
+                    controller.loading.value = false;
+                    if (_phoneController.text.isNotEmpty) {
+                      addReport(downloadURL);
+                      Get.to(FinalScreen());
+                      controller.loading.value = false;
+                    } else {
+                      incompleateData();
+                    }
+                  }),
+            ),
           ]),
         ),
       ),
@@ -385,6 +398,7 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
       controller: controller,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(10),
         filled: true,
         fillColor: Colors.grey.shade100,
         label: AppText(
@@ -397,7 +411,7 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
             color: Colors.grey.shade200,
             width: 2,
           ),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
@@ -431,5 +445,17 @@ class _CameraLocationScreenState extends State<CameraLocationScreen> {
     } catch (e) {
       print('Error capturing image: $e');
     }
+  }
+
+  void incompleateData() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            icon: const Icon(Icons.dangerous_rounded),
+            iconColor: Colors.red,
+            title: Text('Please fill up your full details', style: smallTexts),
+          );
+        });
   }
 }
